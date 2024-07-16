@@ -12,21 +12,21 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {  
-                bat 'docker build -t malithiroshan/nodeapp:%BUILD_NUMBER% .'
+                bat 'docker build -t iroshancodex/nodeapp:%BUILD_NUMBER% .'
             }
         }
         stage('Login to Docker Hub') {
             steps {
                withCredentials([string(credentialsId: 'IroshanCodexpass', variable: 'IroshanCodexPass')]) {
                     script {
-                        bat "docker login -u malithiroshan -p %IroshanCodexPass%"
+                        bat "docker login -u iroshancodex -p %IroshanCodexPass%"
                     }
                 }
             }
         }
         stage('Push Image') {
             steps {
-                bat 'docker push malithiroshan/nodeapp:%BUILD_NUMBER%'
+                bat 'docker push iroshancodex/nodeapp:%BUILD_NUMBER%'
             }
         }
     }
